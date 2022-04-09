@@ -65,7 +65,7 @@ class ProductController extends Controller {
             \Session::flash('err_msg', 'データがありません');
             return redirect('home');
         }
-        
+
         \DB::beginTransaction();
         try {
             Product::destroy($id);
@@ -127,39 +127,3 @@ class ProductController extends Controller {
     }
 }
 
-// <!-- <?php
-
-// namespace App\Http\Controllers;
-
-// use App\Models\Product;
-// use Auth;
-// use Illuminate\Http\Request;
-
-// class ProductController extends Controller
-
-
-// {
-//     public function index()
-//     {
-//         return view('products/index');
-//     }
-
-//     public function exeStore(Request $request)
-    
-    
-//     {
-//         $newProduct = new Product;
-//         $newProduct->product_name = $request->product_name;
-//         $newProduct->description = $request->description;
-//         $newProduct->price = $request->price;
-//         $newProduct->category_id = $request->category_id;
-//         $newProduct->product_status_id = $request->product_status_id;
-//         $newProduct->sale_status_id = $request->sale_status_id;
-//         $newProduct->user_id = Auth::user()->id;
-//         $newProduct->save();
-
-        
-
-//         return view('welcome');
-//     }
-// } -->
