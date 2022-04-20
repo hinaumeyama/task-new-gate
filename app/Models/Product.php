@@ -16,6 +16,24 @@ class Product extends Model
 
     protected $table = 'products';
 
+
+    public function getProducts($keyword, $company_id) {
+        //queryビルダ
+        $query = Product::query();
+
+        //キーワード検索機能
+        if (!empty($keyword)) {
+            $query->where('product_name', 'LIKE', "%{$keyword}%");
+        }
+
+        //プルダウン検索機能
+        if (isset($company_id)) {
+            $query->where('company_id', $company_id);
+        }
+        return $query->get();
+    }
+
+
     //可変項目
     protected $fillable = [
         'product_name',
@@ -24,6 +42,7 @@ class Product extends Model
         'stock',
         'comment',
         'image',
+
     ];
 
     // Companiesテーブルと関連付ける

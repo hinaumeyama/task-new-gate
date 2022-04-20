@@ -95,21 +95,32 @@ class ProductController extends Controller {
         // 画像がアップロードされていれば、storageに保存
         if ($request->hasFile('image')) {
             $path = \Storage::put('/public', $image);
-            $path = explode('/', $path);
+            $path = explode('/', $path)[1];
         } else {
             $path = null;
         }
 
         //商品情報を更新
         $product = Product::find($inputs['id']);
-        $product->fill([
-            'company_id' => $inputs['company_id'],
-            'product_name' => $inputs['product_name'],
-            'price' => $inputs['price'],
-            'stock' => $inputs['stock'],
-            'comment' => $inputs['comment'],
-            'image' => $path[1],
-        ]);
+        if (is_null($path )) {
+            $product->fill([
+                'company_id' => $inputs['company_id'],
+                'product_name' => $inputs['product_name'],
+                'price' => $inputs['price'],
+                'stock' => $inputs['stock'],
+                'comment' => $inputs['comment'],
+            ]);
+        }else {
+            $product->fill([
+                'company_id' => $inputs['company_id'],
+                'product_name' => $inputs['product_name'],
+                'price' => $inputs['price'],
+                'stock' => $inputs['stock'],
+                'comment' => $inputs['comment'],
+                'image' => $path,
+            ]);
+        }
+       
         $product->save();
 
         DB::beginTransaction();

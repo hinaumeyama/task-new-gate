@@ -74,7 +74,7 @@
             
             <td><button type="button" class="btn btn-primary" onclick=" location.href='{{ route('showDetail', $product->id) }}' ">詳細</button></td>
             <td>
-                <form action="{{ route('delete') }}" method='post' onsubmit="return checkDelete()">
+                <form action="{{ route('delete') }}" method='post' onsubmit="return checkSubmit('削除してよろしいですか？')">
                     @csrf
                     <input type="hidden" name=product_id value="{{ $product->id }}">
                     <button type="submit" class="btn btn-primary">削除</button>
@@ -88,14 +88,6 @@
 </div>
 </div>
 
-<script>
-    function checkDelete() {
-        if (window.confirm('削除してよろしいですか？')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
+
 @endsection
 </div>

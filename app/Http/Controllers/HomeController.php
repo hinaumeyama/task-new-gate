@@ -103,20 +103,10 @@ class HomeController extends Controller
         $keyword = $request->input('keyword'); //商品名
         $company_id = $request->input('company_id'); //メーカー名
 
-        //queryビルダ
-        $query = Product::query();
+        $product_model = new Product;
+        $products = $product_model->getProducts($keyword, $company_id);
 
-        //キーワード検索機能
-        if (!empty($keyword)) {
-            $query->where('product_name', 'LIKE', "%{$keyword}%");
-        }
 
-        //プルダウン検索機能
-        if (isset($company_id)) {
-            $query->where('company_id', $company_id);
-        }
-
-        $products = $query->get();
 
         return view('product.home', [
             'companies' => $companies, 
