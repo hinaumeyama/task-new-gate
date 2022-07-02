@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -11,20 +12,22 @@
             <div class="row">
                 <!-- 検索バー -->
                 <div class="col-sm">
-                    <form id="js-form" method="GET" action="{{ route('search') }}">
+                    <form id="js-form" method="GET" action="{{url('/exeAjax') }}">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">商品名</label>
                             <!--入力-->
                             <div class="col-sm-5">
                                 <input type="text" name="keyword" value="{{ $keyword ?? '' }}" id="search_keyword">
                             </div>
-                            
+                            <div class="col-sm-auto">
+                                <button type="button" class="btn btn-primary " id="ajax_search">検索</button>
+                            </div>
                         </div>
                         <!--プルダウンカテゴリ選択-->
                         <div class="form-group row">
                             <label class="col-sm-2">メーカー名</label>
                             <div class="col-sm-3">
-                                <select name="company_id" class="form-control" value="">
+                                <select name="company_name" class="form-control" value="">
                                     <option value="">未選択</option>
 
                                     @foreach($companies as $company)
@@ -33,9 +36,6 @@
 
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-sm-auto">   
-                            <button type="submit" class="btn btn-primary " id="search_button">検索</button>
                         </div>
                     </form>
                 </div>
@@ -46,12 +46,7 @@
 </div>
 
 <div class="col-md-10 justify-content-center">
-
-    
-    
-    <a  class="btn btn-secondary mt-3 mb-3" href="{{ route('showCreate') }}">新規商品登録</a>
-    
-
+    <button class="btn btn-secondary mt-3 mb-3" type="button" onclick=" location.href='/product/create' ">新規商品登録</button>
     <table class="table table-striped append" id="product_table">
         <tr>
             <th>ID</th>
@@ -71,15 +66,10 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
             <td>{{ $product->company->company_name }}</td>
-            
-            <td><button type="button" class="btn btn-primary" onclick=" location.href='{{ route('showDetail', $product->id) }}' ">詳細</button></td>
-            <td>
-                <form action="{{ route('delete') }}" method='post' onsubmit="return checkSubmit('削除してよろしいですか？')">
-                    @csrf
-                    <input type="hidden" name=product_id value="{{ $product->id }}">
-                    <button type="submit" class="btn btn-primary">削除</button>
-                </form>
-            </td>
+            <td><button type="button" class="btn btn-primary" onclick=" location.href='/product/{{ $product->id }}' ">詳細</button></td>
+            <form action="{{ route('delete', $product->id) }}" onsubmit="return checkDelete()">
+                <td><button type="submit" class="btn btn-primary">削除</button></td>
+            </form>
         </tr>
         @endforeach
     </table>
@@ -88,6 +78,15 @@
 </div>
 </div>
 
-
+<script>
+    function checkDelete() {
+        if (window.confirm('削除してよろしいですか？')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 @endsection
+
 </div>

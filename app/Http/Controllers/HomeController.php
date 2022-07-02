@@ -50,7 +50,7 @@ class HomeController extends Controller
      */
     public function showDetail($id) {
         $product = Product::with('company')->find($id);
-        // dd($product);
+        
 
         if (is_null($product)) {
             \Session::flash('err_msg', 'データがありません');
@@ -96,17 +96,17 @@ class HomeController extends Controller
 
     //検索機能
     public function exeSearch(Request $request) {
-        // dd($request);
+        
         $companies = Company::all();
 
         //入力される値nameの定義
-        $keyword = $request->input('keyword'); //商品名
-        $company_id = $request->input('company_id'); //メーカー名
+        $keyword = $request->input('keyword'); 
+        $company_id = $request->input('company_id'); 
 
-        //queryビルダ
+       //queryビルダ
         $query = Product::query();
 
-         //キーワード検索機能
+        //キーワード検索機能
          if (!empty($keyword)) {
             $query->where('product_name', 'LIKE', "%{$keyword}%");
         }
@@ -118,11 +118,9 @@ class HomeController extends Controller
 
         $product_model = new Product;
         $products = $product_model->getProducts($keyword, $company_id);
-        //オリジナル
-        // $products = $query->get();
-
-        //オリジナル
-        // return view('product.home', ['companies' => $companies], compact('products', 'keyword', 'company_name'),);
+        
+        $products = $query->get();
+       
         return view('product.home', [
             'companies' => $companies, 
             'products' => $products, 

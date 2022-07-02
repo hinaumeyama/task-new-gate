@@ -11,16 +11,24 @@ use Illuminate\Support\Facades\Auth;
 class AjaxController extends Controller
 {
     //検索機能の非同期処理
-    public function exeAjaxSearch($search_keyword) {
+    public function exeAjaxSearch(Request $request) {
         
         //入力される値nameの定義
-        $keyword = Product::with('Company')->where('product_name', 'LIKE', "%$search_keyword%")->get(); //商品名
-        // $company_name = $request->input('company_name'); //メーカー名
+        $keyword = $request->keyword;
 
-        error_log(var_export($keyword, true), 3, "./debug.txt");
+        $products = Product::with('company')->where('product_name', 'LIKE', "%$keyword%" )->get(); //商品名
+           
+        // $keyword = keyword::all();
 
-        return response()->json($keyword);
+            
+    
+        
+        //  Product::with('Company')->where('product_name', 'LIKE', "%$search_keyword%")->get(); 
+        
+        error_log(var_export($products, true), 3, "./debug.txt");
 
-        // $product_name = Product::where('product_name', 'LIKE', "%{$keyword}%");
+        return response()->json($products);
+
+       
     }
 }

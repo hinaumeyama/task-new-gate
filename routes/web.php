@@ -26,7 +26,7 @@ Route::get('/home', 'LoginController@login')->name('login');
 //----------------------------------------------------------------------------------
 
 //Ajax処理
-Route::get('/home{search_keyword}', 'AjaxController@exeAjaxSearch')->name('exeAjax'); 
+Route::get('/search', 'AjaxController@exeAjaxSearch')->name('exeAjax'); 
 
 //商品一覧画面を表示
 Route::get('/home', 'HomeController@showHome')->name('home');
