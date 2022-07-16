@@ -6,9 +6,13 @@ function checkSubmit(message){
 $(function () {
     
     $('#ajax_search').on('click', function () {
-        $("#product_table").empty(); 
+        $("#product_table").empty();
+        
+       
 
         var search_keyword = $('#search_keyword').val(); 
+       
+        console.log(search_keyword);
 
         var urls = [
             '/task/public/home?' + search_keyword,
@@ -17,14 +21,14 @@ $(function () {
 
         $.ajax({
             type: 'GET',
-            url: urls,
+            url: '/ajaxsearch?' + search_keyword,
             datatype: 'json', 
             data: {
                 keyword: search_keyword,
             }
    
         }).done(function (data) {
-            // console.log(urls);
+           
             let html = "";
             $.each(data, function (index, value) {
                 let id = value.id;
@@ -34,7 +38,7 @@ $(function () {
                 let company_name = value.company_name;
                 let img = value.image;
                
-                console.log(urls);
+                // console.log(urls);
             
                 html= `
                 <tr>
@@ -62,6 +66,8 @@ $(function () {
                 `
             })
             $('.append').append(html);
+
+            // $('#product_table').append(html);
         })
     })
 });

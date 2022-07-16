@@ -13,6 +13,7 @@ class AjaxController extends Controller
     //検索機能の非同期処理
     public function exeAjaxSearch(Request $request) {
         
+        dd($request);
         //入力される値nameの定義
         $keyword = $request->keyword;
 

@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ Route::get('/home', 'LoginController@login')->name('login');
 //----------------------------------------------------------------------------------
 
 //Ajax処理
-Route::get('/search', 'AjaxController@exeAjaxSearch')->name('exeAjax'); 
+Route::get('/ajaxsearch', 'AjaxController@exeAjaxSearch')->name('exeAjax'); 
 
 //商品一覧画面を表示
 Route::get('/home', 'HomeController@showHome')->name('home');
