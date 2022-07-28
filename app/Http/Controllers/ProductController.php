@@ -19,11 +19,12 @@ class ProductController extends Controller {
         $inputs = $request->all();
         // dd($inputs);
         
-        $image = $request->file('image');
-    
+        
+        
         $path = null;
         // 画像がアップロードされていれば、storageに保存
         if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $path = \Storage::put('/public', $image);
             $path = explode('/', $path);
         }

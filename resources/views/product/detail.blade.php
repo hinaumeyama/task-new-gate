@@ -24,8 +24,7 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
             <td>{{ $product->comment }}</td>
-            <!-- <td><button type="button" class="btn btn-primary" onclick="location.href='/product/edit/{{ $product->id }}'">編集</button></td> -->
-            <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('showEdit', $product->id) }}'">詳細</button></td>
+            <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('showEdit', $product->id) }}'">編集</button></td>
         </tr>
     </table>
     </div>

@@ -47,8 +47,7 @@
 
 <div class="col-md-10 justify-content-center">
     <button class="btn btn-secondary mt-3 mb-3" type="button" onclick=" location.href='/product/create' ">新規商品登録</button>
-    <table class="table table-striped append" id="product_table">
-    <!-- <table class="table table-striped " id="product_table"> -->
+    <table class="table table-striped append">
         <tr>
             <th>ID</th>
             <th>商品画像</th>
@@ -59,6 +58,7 @@
             <th></th>
             <th></th>
         </tr>
+        <tbody id="product_table">
         @foreach($products as $product)
         <tr class='product_table' id="product_table">
         <td>{{ $product->id }}</td>
@@ -73,6 +73,7 @@
           </form>
         </tr>
         @endforeach
+        </tbody>
     </table>
     <table id="append"></table>
     <!-- <table id="products_table"></table> -->

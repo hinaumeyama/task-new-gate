@@ -63,11 +63,12 @@ $(function () {
                         <td><button type="submit" class="btn btn-primary">削除</button></td>
                     </form>
                 </tr>
-                `
-            })
-            $('.append').append(html);
+            $('#product_table').append(html);
+            `
 
-            // $('#product_table').append(html);
+            })
+            
+
         })
     })
 });
