@@ -17,7 +17,7 @@ class ProductController extends Controller {
     public function exeStore(ProductRegisterRequest $request) {
         // 商品のデータを受け取る
         $inputs = $request->all();
-        // dd($inputs);
+        
         
         
         
@@ -28,7 +28,6 @@ class ProductController extends Controller {
             $path = \Storage::put('/public', $image);
             $path = explode('/', $path);
         }
-        // dd($path);
         \DB::beginTransaction();
         try {
             // 商品を登録
@@ -39,8 +38,6 @@ class ProductController extends Controller {
                 'stock' => $inputs['stock'],
                 'comment' => $inputs['comment'],
                 'image' => $path[1],
-                // 'image' => $path['img_path'],
-
 
             ]);
             \DB::commit();

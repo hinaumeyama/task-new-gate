@@ -17,7 +17,7 @@
                             <label class="col-sm-2 col-form-label">商品名</label>
                             <!--入力-->
                             <div class="col-sm-5">
-                                <input type="text" name="keyword" value="{{ $keyword ?? '' }}" id="search_keyword">
+                                <input type="text" name="keyword" value="{{ $keyword ?? '' }}" id="product_name">
                             </div>
                             <div class="col-sm-auto">
                                 <button type="button" class="btn btn-primary " id="ajax_search">検索</button>
@@ -27,7 +27,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2">メーカー名</label>
                             <div class="col-sm-3">
-                                <select name="company_name" class="form-control" value="">
+                                <select id="company_id" class="form-control" value="">
                                     <option value="">未選択</option>
 
                                     @foreach($companies as $company)
@@ -76,7 +76,6 @@
         </tbody>
     </table>
     <table id="append"></table>
-    <!-- <table id="products_table"></table> -->
 </div>
 </div>
 </div>

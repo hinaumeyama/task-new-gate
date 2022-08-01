@@ -13,12 +13,14 @@ class AjaxController extends Controller
     //検索機能の非同期処理
     public function exeAjaxSearch(Request $request) {
         
-        dd($request);
+       
         //入力される値nameの定義
-        $keyword = $request->keyword;
+        $product_name = $request->product_name;
+        $company_id = $request->company_id;
 
-        $products = Product::with('company')->where('product_name', 'LIKE', "%$keyword%" )->get(); //商品名
-           
+        $product_model = new Product;
+        $products = $product_model->getProducts($product_name, $company_id);
+        
         // $keyword = keyword::all();
 
             
@@ -26,7 +28,7 @@ class AjaxController extends Controller
         
         //  Product::with('Company')->where('product_name', 'LIKE', "%$search_keyword%")->get(); 
         
-        error_log(var_export($products, true), 3, "./debug.txt");
+        // error_log(var_export($products, true), 3, "./debug.txt");
 
         return response()->json($products);
 

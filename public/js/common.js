@@ -10,25 +10,26 @@ $(function () {
         
        
 
-        var search_keyword = $('#search_keyword').val(); 
+        let product_name = $('#product_name').val(); 
+        let company_id = $('#company_id').val(); 
        
-        console.log(search_keyword);
+        console.log(product_name);
 
-        var urls = [
-            '/task/public/home?' + search_keyword,
-        ];
+        
        
 
         $.ajax({
             type: 'GET',
-            url: '/ajaxsearch?' + search_keyword,
+            url: '/ajaxsearch',
             datatype: 'json', 
             data: {
-                keyword: search_keyword,
+                product_name: product_name,
+                company_id: company_id,
             }
    
         }).done(function (data) {
-           
+            console.log(data);
+
             let html = "";
             $.each(data, function (index, value) {
                 let id = value.id;
@@ -41,30 +42,18 @@ $(function () {
                 // console.log(urls);
             
                 html= `
-                <tr>
-                    <th>ID</th>
-                    <th>商品画像</th>
-                    <th>商品名</th>
-                    <th>値段</th>
-                    <th>在庫数</th>
-                    <th>メーカー名</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>${id}</td>
-                    <td><img src="${img}" class="img-fluid" width="200" height="200"></td>
-                    <td>${product_name}</td>
-                    <td>${price}</td>
-                    <td>${stock}</td>
-                    <td>${company_name}</td>
-                    <td><button type="button" class="btn btn-primary" onclick=" location.href='/product/${id}' ">詳細</button></td>
-                    <form action="{{ route('delete', $product->id) }}" onsubmit="return checkDelete()">
+                    <tr>
+                        <td>${id}</td>
+                        <td><img src="/storage/${img}" class="img-fluid" width="200" height="200"></td>
+                        <td>${product_name}</td>
+                        <td>${price}</td>
+                        <td>${stock}</td>
+                        <td>${company_name}</td>
+                        <td><button type="button" class="btn btn-primary" onclick=" location.href='/product/${id}' ">詳細</button></td>
                         <td><button type="submit" class="btn btn-primary">削除</button></td>
-                    </form>
-                </tr>
-            $('#product_table').append(html);
-            `
+                    </tr>
+                `;
+                $('#product_table').append(html);
 
             })
             

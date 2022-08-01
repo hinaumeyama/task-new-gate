@@ -20,6 +20,7 @@ class Product extends Model
     public function getProducts($keyword, $company_id) {
         //queryビルダ
         $query = Product::query();
+        $query->join('companies', 'products.company_id', '=', 'companies.id');
 
         //キーワード検索機能
         if (!empty($keyword)) {
